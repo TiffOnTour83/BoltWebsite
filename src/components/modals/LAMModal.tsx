@@ -57,7 +57,7 @@ export default function LAMModal({ elapsedSeconds, onClose }: Props) {
                 key={i}
                 className="flex items-center justify-between text-sm py-2 px-3 rounded-lg border"
                 style={{
-                  background: 'rgba(255,255,255,0.70)',
+                  background: 'rgba(255,250,246,0.72)',
                   borderColor: 'var(--border)',
                 }}
               >
@@ -98,12 +98,12 @@ export default function LAMModal({ elapsedSeconds, onClose }: Props) {
               placeholder="Display name (optional)"
               className="w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none transition-colors"
               style={{
-                background: 'rgba(255,255,255,0.70)',
+                background: 'rgba(255,250,246,0.72)',
                 border: '1px solid var(--border)',
                 color: 'var(--text)',
               }}
               onFocus={(e) => {
-                (e.currentTarget as HTMLInputElement).style.borderColor = 'rgba(79,1,71,0.35)';
+                (e.currentTarget as HTMLInputElement).style.borderColor = 'var(--border-strong)';
               }}
               onBlur={(e) => {
                 (e.currentTarget as HTMLInputElement).style.borderColor = 'var(--border)';
@@ -121,12 +121,12 @@ export default function LAMModal({ elapsedSeconds, onClose }: Props) {
               placeholder="Email (optional)"
               className="w-full rounded-lg px-4 py-2.5 text-sm focus:outline-none transition-colors"
               style={{
-                background: 'rgba(255,255,255,0.70)',
+                background: 'rgba(255,250,246,0.72)',
                 border: '1px solid var(--border)',
                 color: 'var(--text)',
               }}
               onFocus={(e) => {
-                (e.currentTarget as HTMLInputElement).style.borderColor = 'rgba(79,1,71,0.35)';
+                (e.currentTarget as HTMLInputElement).style.borderColor = 'var(--border-strong)';
               }}
               onBlur={(e) => {
                 (e.currentTarget as HTMLInputElement).style.borderColor = 'var(--border)';
@@ -139,11 +139,11 @@ export default function LAMModal({ elapsedSeconds, onClose }: Props) {
               className="px-5 py-2.5 rounded-lg border text-sm font-medium tracking-wide transition-all duration-200"
               style={{
                 background: 'var(--accent)',
-                borderColor: 'rgba(58,1,92,0.18)',
+                borderColor: 'var(--border)',
                 color: '#ffffff',
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLButtonElement).style.background = 'rgba(58,1,92,0.92)';
+                (e.currentTarget as HTMLButtonElement).style.background = 'rgba(95,33,77,0.92)';
               }}
               onMouseLeave={(e) => {
                 (e.currentTarget as HTMLButtonElement).style.background = 'var(--accent)';

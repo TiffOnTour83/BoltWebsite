@@ -6,28 +6,28 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="relative z-10 border-t py-8 px-6" style={{ borderColor: 'rgba(17,0,28,0.10)' }}>
+      <footer className="relative z-10 border-t py-8 px-6" style={{ borderColor: 'var(--border)' }}>
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="font-display text-lg" style={{ color: '#3a015c' }}>
+            <span className="font-display text-lg" style={{ color: 'var(--accent)' }}>
               TC
             </span>
-            <span className="text-xs" style={{ color: 'rgba(17,0,28,0.35)' }}>
+            <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
               ·
             </span>
-            <span className="text-xs tracking-wide" style={{ color: 'rgba(17,0,28,0.62)' }}>
+            <span className="text-xs tracking-wide" style={{ color: 'var(--text-secondary)' }}>
               Atlanta, Georgia
             </span>
           </div>
 
           <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full" style={{ background: 'rgba(58,1,92,0.55)' }} />
-            <span className="text-xs tracking-wide" style={{ color: 'rgba(17,0,28,0.55)' }}>
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: 'var(--accent)' }} />
+            <span className="text-xs tracking-wide" style={{ color: 'var(--text-secondary)' }}>
               Systems integration · compliance · training systems
             </span>
           </div>
 
-          <p className="text-xs" style={{ color: 'rgba(17,0,28,0.45)' }}>
+          <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
             &copy; {new Date().getFullYear()} Tiffany Castro
           </p>
         </div>
@@ -38,9 +38,9 @@ export default function Footer() {
             onClick={() => setHatchOpen(true)}
             className="text-xs tracking-widest transition-colors duration-300 font-mono px-6 py-3 rounded-lg"
             style={{
-              color: 'rgba(58,1,92,0.70)',
-              background: 'rgba(58,1,92,0.06)',
-              border: '1px solid rgba(58,1,92,0.18)',
+              color: 'var(--accent)',
+              background: 'rgba(95,33,77,0.06)',
+              border: '1px solid var(--border)',
             }}
             aria-label="Open Maintenance Hatch"
           >

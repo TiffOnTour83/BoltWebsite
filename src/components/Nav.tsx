@@ -21,8 +21,11 @@ export default function Nav() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? 'bg-surface/90 backdrop-blur-md border-b border-border shadow-sm' : 'bg-surface/55 backdrop-blur-sm'
+        scrolled ? 'backdrop-blur-md border-b border-border shadow-sm' : 'backdrop-blur-sm'
       }`}
+      style={{
+        background: scrolled ? 'rgba(255,250,246,0.90)' : 'rgba(255,250,246,0.55)',
+      }}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
         <a href="#top" className="font-display text-lg tracking-wider transition-colors text-accent">
@@ -56,7 +59,10 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-surface/92 backdrop-blur-md border-t border-border px-6 py-6 flex flex-col gap-5">
+        <div
+          className="md:hidden backdrop-blur-md border-t border-border px-6 py-6 flex flex-col gap-5"
+          style={{ background: 'rgba(255,250,246,0.92)' }}
+        >
           {links.map((l) => (
             <a
               key={l.href}

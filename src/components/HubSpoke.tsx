@@ -69,16 +69,13 @@ const NODE_Y = [105, 185, 275, 355];
 
 const HIGHLIGHT_X = 115;
 const SKILL_X = W - HIGHLIGHT_X; // 725
-
-function clamp(n: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, n));
-}
+const SKILL_NODE_COLOR = '#8d4567';
 
 function truncate(s: string, max: number) {
   return s.length > max ? s.slice(0, max - 1) + '…' : s;
 }
 
-function calcHubEdge(nodeX: number, nodeY: number, isLeft: boolean) {
+function calcHubEdge(nodeY: number, isLeft: boolean) {
   const edgeX = isLeft ? HUB_LEFT_X : HUB_RIGHT_X;
   const t = (nodeY - NODE_Y[0]) / (NODE_Y[NODE_Y.length - 1] - NODE_Y[0]);
   const edgeY = HUB_Y + 20 + t * (HUB_H - 40);
@@ -92,7 +89,7 @@ function SpokeLines({ project }: { project: HubProject }) {
       {project.highlights.map((_, i) => {
         const nodeX = HIGHLIGHT_X;
         const nodeY = NODE_Y[i];
-        const edge = calcHubEdge(nodeX, nodeY, true);
+        const edge = calcHubEdge(nodeY, true);
         return (
           <line
             key={`h${i}`}
@@ -110,7 +107,7 @@ function SpokeLines({ project }: { project: HubProject }) {
       {project.skills.map((_, i) => {
         const nodeX = SKILL_X;
         const nodeY = NODE_Y[i];
-        const edge = calcHubEdge(nodeX, nodeY, false);
+        const edge = calcHubEdge(nodeY, false);
         return (
           <line
             key={`s${i}`}
@@ -118,7 +115,7 @@ function SpokeLines({ project }: { project: HubProject }) {
             y1={edge.y}
             x2={nodeX}
             y2={nodeY}
-            stroke="#3a015c"
+            stroke={SKILL_NODE_COLOR}
             strokeWidth="1.7"
             strokeOpacity="0.20"
             strokeDasharray="4 3"
@@ -142,7 +139,7 @@ function HubRect({ project }: { project: HubProject }) {
       <defs>
         <linearGradient id={gradId} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor={`rgba(${r},${g},${b},0.12)`} />
-          <stop offset="100%" stopColor="rgba(255,255,255,0.92)" />
+          <stop offset="100%" stopColor="rgba(255,250,246,0.92)" />
         </linearGradient>
         <filter id={glowId} x="-30%" y="-30%" width="160%" height="160%">
           <feGaussianBlur stdDeviation="8" result="blur" />
@@ -201,7 +198,7 @@ function HubRect({ project }: { project: HubProject }) {
           textAnchor="middle"
           fontSize="16"
           fontWeight="650"
-          fill="#11001c"
+          fill="var(--text)"
           fontFamily="'Playfair Display', Georgia, serif"
         >
           {line}
@@ -214,7 +211,7 @@ function HubRect({ project }: { project: HubProject }) {
         y={HUB_Y + HUB_H - 20}
         textAnchor="middle"
         fontSize="10"
-        fill="rgba(17,0,28,0.64)"
+        fill="var(--text-secondary)"
         fontFamily="Inter, system-ui, sans-serif"
       >
         {truncate(project.desc, 56)}
@@ -243,15 +240,15 @@ export default function HubSpoke() {
             style={
               p.id === activeId
                 ? {
-                    borderColor: 'rgba(17,0,28,0.10)',
-                    background: 'rgba(58,1,92,0.10)',
-                    color: '#11001c',
+                    borderColor: 'var(--border-strong)',
+                    background: 'rgba(95,33,77,0.10)',
+                    color: 'var(--text)',
                     fontWeight: 650,
                   }
                 : {
-                    borderColor: 'rgba(17,0,28,0.10)',
-                    background: 'rgba(255,255,255,0.65)',
-                    color: 'rgba(17,0,28,0.70)',
+                    borderColor: 'var(--border)',
+                    background: 'rgba(255,250,246,0.7)',
+                    color: 'var(--text-secondary)',
                   }
             }
           >
@@ -293,14 +290,14 @@ export default function HubSpoke() {
           {/* Right skill nodes */}
           {project.skills.map((label, i) => (
             <g key={`sk${i}`}>
-              <NodeDot x={SKILL_X} y={NODE_Y[i]} color="#3a015c" />
+              <NodeDot x={SKILL_X} y={NODE_Y[i]} color={SKILL_NODE_COLOR} />
               <text
                 x={SKILL_X + 12}
                 y={NODE_Y[i] + 4}
                 textAnchor="start"
                 fontSize="11"
                 fontFamily="Inter, system-ui, sans-serif"
-                fill="#3a015c"
+                fill={SKILL_NODE_COLOR}
                 fontWeight="600"
               >
                 {truncate(label, 18)}
@@ -320,13 +317,13 @@ export default function HubSpoke() {
             className="w-2.5 h-2.5 rounded-full inline-block flex-shrink-0"
             style={{ background: project.color }}
           />
-          <span className="text-xs tracking-wide" style={{ color: 'rgba(17,0,28,0.60)' }}>
+          <span className="text-xs tracking-wide" style={{ color: 'var(--text-secondary)' }}>
             Highlights
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full inline-block flex-shrink-0" style={{ background: '#3a015c' }} />
-          <span className="text-xs tracking-wide" style={{ color: 'rgba(17,0,28,0.60)' }}>
+          <span className="w-2.5 h-2.5 rounded-full inline-block flex-shrink-0" style={{ background: SKILL_NODE_COLOR }} />
+          <span className="text-xs tracking-wide" style={{ color: 'var(--text-secondary)' }}>
             Skills
           </span>
         </div>

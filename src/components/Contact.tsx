@@ -31,7 +31,7 @@ export default function Contact() {
     <section id="contact" ref={sectionRef} className="relative z-10 py-24 px-6">
       <div className="max-w-4xl mx-auto">
         <div className="reveal flex items-center gap-4 mb-4">
-          <div className="h-px flex-1 max-w-[60px]" style={{ background: 'rgba(58,1,92,0.22)' }} />
+          <div className="h-px flex-1 max-w-[60px]" style={{ background: 'var(--border-strong)' }} />
           <span className="text-xs tracking-[0.3em] uppercase font-medium" style={{ color: 'var(--accent)' }}>
             Get In Touch
           </span>
@@ -66,8 +66,8 @@ export default function Contact() {
               <div
                 className="w-9 h-9 rounded-lg border flex items-center justify-center transition-colors"
                 style={{
-                  background: 'rgba(58,1,92,0.06)',
-                  borderColor: 'rgba(58,1,92,0.18)',
+                  background: 'rgba(95,33,77,0.08)',
+                  borderColor: 'var(--border)',
                 }}
               >
                 <Mail size={16} style={{ color: 'var(--accent)' }} />
@@ -91,8 +91,8 @@ export default function Contact() {
               <div
                 className="w-9 h-9 rounded-lg border flex items-center justify-center transition-colors"
                 style={{
-                  background: 'rgba(79,1,71,0.06)',
-                  borderColor: 'rgba(79,1,71,0.18)',
+                  background: 'rgba(141,69,103,0.08)',
+                  borderColor: 'var(--border)',
                 }}
               >
                 <Linkedin size={16} style={{ color: 'var(--accent-2)' }} />
@@ -130,14 +130,7 @@ export default function Contact() {
             <div className="mt-8 pt-5" style={{ borderTop: '1px solid var(--border)' }}>
               <a
                 href="mailto:tiffanycastro83@yahoo.com"
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 font-semibold text-sm tracking-widest uppercase rounded-xl transition-all duration-200"
-                style={{ background: 'var(--accent)', color: '#ffffff' }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.background = 'rgba(58,1,92,0.92)';
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.background = 'var(--accent)';
-                }}
+                className="w-full flex items-center justify-center gap-2 px-6 py-3 font-semibold text-sm tracking-widest uppercase rounded-xl transition-all duration-200 btn-primary"
               >
                 <Mail size={15} />
                 Send a Message

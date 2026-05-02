@@ -4,26 +4,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* =========================================================
-   FINAL NO-DRIFT DESIGN TOKENS (LOCKED)
-   Only these 9 tokens are allowed to exist.
-   If it is not one of these, it must not exist.
-
-   Tokens:
-   --bg, --surface, --text, --text-muted,
-   --accent, --state, --decor,
-   --border, --backdrop
-   ========================================================= */
 :root {
-  --bg: #0f1115;
-  --surface: #1a2330;
-  --text: #e6edf3;
-  --text-muted: #aebbc6;
-  --accent: #4fd1c5; /* interaction identity (LOCKED) */
-  --state: #a08a50; /* metadata meaning only */
-  --decor: #c383b5; /* background-only noise (never interactive) */
-  --border: rgba(230, 237, 243, 0.18);
-  --backdrop: rgba(15, 17, 21, 0.78);
+  --bg: #f7efe8;
+  --surface: #fffaf6;
+  --surface-2: #f4e9e3;
+  --text: #1f1320;
+  --text-secondary: #5b4754;
+  --text-muted: #8b7481;
+  --accent: #5f214d;
+  --accent-2: #8d4567;
+  --accent-3: #c07a63;
+  --interaction: #b27449;
+  --border: rgba(95, 33, 77, 0.14);
+  --border-strong: rgba(95, 33, 77, 0.24);
+  --backdrop: rgba(31, 19, 32, 0.42);
 }
 
 @layer base {
@@ -40,6 +34,10 @@
     color: var(--text);
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at top left, rgba(95, 33, 77, 0.08), transparent 38%),
+      radial-gradient(circle at 85% 18%, rgba(192, 122, 99, 0.12), transparent 30%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0));
   }
 
   /* Default everything to neutral */
@@ -56,7 +54,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid rgba(79, 209, 197, 0.55);
+    outline: 2px solid rgba(95, 33, 77, 0.38);
     outline-offset: 3px;
     border-radius: 10px;
   }
@@ -68,6 +66,7 @@
     @apply border rounded-2xl p-6 transition-all duration-300;
     background: var(--surface);
     border-color: var(--border);
+    box-shadow: 0 20px 60px rgba(95, 33, 77, 0.06);
   }
 
   .nav-link {
@@ -81,8 +80,8 @@
   .tag {
     @apply inline-block px-3 py-1 text-xs font-medium rounded-full tracking-wide;
     border: 1px solid var(--border);
-    background: rgba(230, 237, 243, 0.04);
-    color: var(--text-muted);
+    background: rgba(95, 33, 77, 0.07);
+    color: var(--text-secondary);
   }
 
   /* Interaction signal (accent) — ONLY for interactive elements */
@@ -93,13 +92,15 @@
   /* Buttons: only two types */
   .btn-primary {
     background: var(--accent);
-    color: var(--bg);
+    color: #fff8f6;
     border: none;
-    transition: opacity 180ms ease, transform 180ms ease;
+    box-shadow: 0 18px 36px rgba(95, 33, 77, 0.18);
+    transition: opacity 180ms ease, transform 180ms ease, box-shadow 180ms ease;
   }
   .btn-primary:hover {
     opacity: 0.92;
     transform: translateY(-1px);
+    box-shadow: 0 20px 42px rgba(95, 33, 77, 0.24);
   }
 
   .btn-secondary {
@@ -108,10 +109,20 @@
     border: 1px solid var(--border);
     transition: opacity 180ms ease, transform 180ms ease, border-color 180ms ease;
   }
-  /* Secondary hover: accent border ONLY (no accent text + border together) */
   .btn-secondary:hover {
-    border-color: rgba(79, 209, 197, 0.55);
+    border-color: rgba(95, 33, 77, 0.34);
     transform: translateY(-1px);
+  }
+
+  .text-gradient-amethyst {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glow-amethyst {
+    box-shadow: 0 18px 40px rgba(95, 33, 77, 0.18);
   }
 }
 
@@ -130,14 +141,14 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: rgba(230, 237, 243, 0.04);
+  background: rgba(95, 33, 77, 0.04);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(230, 237, 243, 0.14);
+  background: rgba(95, 33, 77, 0.16);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(230, 237, 243, 0.22);
+  background: rgba(95, 33, 77, 0.24);
 }
 
 /* Section reveal animation */
