@@ -5,6 +5,28 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Background + surfaces */
+    --bg: #f7f7fa;
+    --surface: rgba(255, 255, 255, 0.92);
+
+    /* Text */
+    --text: #0e0b14;
+    --text-secondary: rgba(14, 11, 20, 0.7);
+    --text-muted: rgba(14, 11, 20, 0.45);
+
+    /* Identity accent */
+    --accent: #3a015c;
+    --accent-2: #4f0147;
+    --accent-3: #35012c;
+
+    /* Interaction accent (counter-accent) */
+    --interaction: #4fd1c5;
+
+    /* Borders */
+    --border: rgba(14, 11, 20, 0.08);
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -14,8 +36,8 @@
   }
 
   body {
-    background-color: #ffffff;
-    color: #11001c;
+    background-color: var(--bg);
+    color: var(--text);
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
@@ -28,26 +50,26 @@
 
   .puzzle-dot {
     @apply w-2 h-2 rounded-full mx-1 opacity-60;
-    background-color: #3a015c;
+    background-color: var(--accent);
   }
 
   .nav-link {
     @apply transition-colors duration-200 text-sm tracking-widest uppercase font-medium;
-    color: rgba(17, 0, 28, 0.72);
+    color: var(--text-secondary);
   }
   .nav-link:hover {
-    color: #3a015c;
+    color: var(--accent);
   }
 
   .card-base {
     @apply border rounded-2xl p-6 transition-all duration-300;
-    background: rgba(248, 250, 252, 0.92);
-    border-color: rgba(17, 0, 28, 0.12);
-    box-shadow: 0 18px 48px rgba(17, 0, 28, 0.06);
+    background: var(--surface);
+    border-color: var(--border);
+    box-shadow: 0 18px 48px rgba(14, 11, 20, 0.06);
   }
   .card-base:hover {
     border-color: rgba(58, 1, 92, 0.28);
-    box-shadow: 0 22px 70px rgba(17, 0, 28, 0.10);
+    box-shadow: 0 22px 70px rgba(14, 11, 20, 0.10);
   }
 
   .tag {
@@ -57,7 +79,7 @@
 
 @layer utilities {
   .text-gradient-amethyst {
-    background: linear-gradient(135deg, #3a015c, #4f0147, #35012c);
+    background: linear-gradient(135deg, var(--accent), var(--accent-2), var(--accent-3));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -88,7 +110,7 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: #ffffff;
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(58, 1, 92, 0.35);
@@ -110,7 +132,7 @@
   transform: translateY(0);
 }
 
-/* Maintenance Hatch alarm flash (amethyst) */
+/* Maintenance Hatch alarm flash (amethyst + interaction accent) */
 @keyframes hatch-alarm {
   0% {
     border-color: rgba(58, 1, 92, 0.25);
@@ -128,14 +150,14 @@
     box-shadow: 0 0 48px rgba(79, 1, 71, 0.20), 0 0 110px rgba(79, 1, 71, 0.08);
   }
   80% {
-    border-color: rgba(53, 1, 44, 0.7);
-    background-color: rgba(53, 1, 44, 0.10);
-    box-shadow: 0 0 32px rgba(53, 1, 44, 0.16);
+    border-color: rgba(79, 1, 71, 0.35);
+    background-color: rgba(79, 1, 71, 0.08);
+    box-shadow: 0 0 32px rgba(79, 1, 71, 0.16);
   }
   100% {
-    border-color: rgba(17, 0, 28, 0.22);
-    background-color: transparent;
-    box-shadow: none;
+    border-color: var(--border);
+    background-color: rgba(79, 1, 71, 0.04);
+    box-shadow: 0 0 0 rgba(79, 1, 71, 0);
   }
 }
 
