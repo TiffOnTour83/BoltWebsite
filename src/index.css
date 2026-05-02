@@ -16,13 +16,13 @@
    ========================================================= */
 :root {
   --bg: #0f1115;
-  --surface: #151a22;
+  --surface: #1a2330;
   --text: #e6edf3;
-  --text-muted: #9aa7b2;
+  --text-muted: #aebbc6;
   --accent: #4fd1c5; /* interaction identity (LOCKED) */
   --state: #a08a50; /* metadata meaning only */
   --decor: #c383b5; /* background-only noise (never interactive) */
-  --border: rgba(230, 237, 243, 0.12);
+  --border: rgba(230, 237, 243, 0.18);
   --backdrop: rgba(15, 17, 21, 0.78);
 }
 
