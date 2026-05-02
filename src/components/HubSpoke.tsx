@@ -48,7 +48,7 @@ const hubProjects: HubProject[] = [
       'XTML Conversion',
       'MS Pilot Plugin',
       'Version Control',
-      'Scalable at Scale',
+      'Enterprise Scale',
     ],
     skills: [
       'Comply365 / XTML',
