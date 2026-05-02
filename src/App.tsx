@@ -10,7 +10,7 @@ import SectionDivider from './components/SectionDivider';
 
 export default function App() {
   return (
-    <div className="relative min-h-screen bg-[#0c1a2e]">
+    <div className="relative min-h-screen bg-white text-[#11001c]">
       <ParticleCanvas />
       <Nav />
 

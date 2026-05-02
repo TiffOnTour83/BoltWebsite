@@ -14,8 +14,8 @@
   }
 
   body {
-    background-color: #0c1a2e;
-    color: #f7f3ee;
+    background-color: #ffffff;
+    color: #11001c;
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
@@ -27,15 +27,27 @@
   }
 
   .puzzle-dot {
-    @apply w-2 h-2 rounded-full bg-gold-500 mx-1 opacity-60;
+    @apply w-2 h-2 rounded-full mx-1 opacity-60;
+    background-color: #3a015c;
   }
 
   .nav-link {
-    @apply text-warm-200 hover:text-gold-300 transition-colors duration-200 text-sm tracking-widest uppercase font-medium;
+    @apply transition-colors duration-200 text-sm tracking-widest uppercase font-medium;
+    color: rgba(17, 0, 28, 0.72);
+  }
+  .nav-link:hover {
+    color: #3a015c;
   }
 
   .card-base {
-    @apply bg-navy-800 border border-teal-800 rounded-xl p-6 hover:border-gold-500 transition-all duration-300;
+    @apply border rounded-2xl p-6 transition-all duration-300;
+    background: rgba(248, 250, 252, 0.86);
+    border-color: rgba(17, 0, 28, 0.10);
+    box-shadow: 0 18px 48px rgba(17, 0, 28, 0.06);
+  }
+  .card-base:hover {
+    border-color: rgba(58, 1, 92, 0.22);
+    box-shadow: 0 22px 70px rgba(17, 0, 28, 0.10);
   }
 
   .tag {
@@ -44,30 +56,19 @@
 }
 
 @layer utilities {
-  .text-gradient-gold {
-    background: linear-gradient(135deg, #c9a04a, #d9b86a, #b08830);
+  .text-gradient-amethyst {
+    background: linear-gradient(135deg, #3a015c, #4f0147, #35012c);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .text-gradient-teal {
-    background: linear-gradient(135deg, #178787, #3bbcbc, #1fa0a0);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .border-gradient-amethyst {
+    border-image: linear-gradient(135deg, rgba(58, 1, 92, 0.55), rgba(79, 1, 71, 0.55)) 1;
   }
 
-  .border-gradient {
-    border-image: linear-gradient(135deg, #c9a04a, #3bbcbc) 1;
-  }
-
-  .glow-gold {
-    box-shadow: 0 0 20px rgba(201, 160, 74, 0.15), 0 0 40px rgba(201, 160, 74, 0.05);
-  }
-
-  .glow-teal {
-    box-shadow: 0 0 20px rgba(59, 188, 188, 0.15), 0 0 40px rgba(59, 188, 188, 0.05);
+  .glow-amethyst {
+    box-shadow: 0 0 26px rgba(58, 1, 92, 0.12), 0 0 60px rgba(79, 1, 71, 0.06);
   }
 }
 
@@ -87,14 +88,14 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0a1628;
+  background: #f8fafc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #126e6e;
+  background: rgba(58, 1, 92, 0.35);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #c9a04a;
+  background: rgba(79, 1, 71, 0.55);
 }
 
 /* Section reveal animation */
@@ -109,30 +110,30 @@
   transform: translateY(0);
 }
 
-/* Maintenance Hatch alarm flash */
+/* Maintenance Hatch alarm flash (amethyst) */
 @keyframes hatch-alarm {
-  0%   {
-    border-color: rgba(201, 160, 74, 0.4);
-    background-color: rgba(201, 160, 74, 0.06);
-    box-shadow: 0 0 0 rgba(201, 160, 74, 0);
+  0% {
+    border-color: rgba(58, 1, 92, 0.25);
+    background-color: rgba(58, 1, 92, 0.04);
+    box-shadow: 0 0 0 rgba(58, 1, 92, 0);
   }
-  25%  {
-    border-color: rgba(201, 160, 74, 1);
-    background-color: rgba(201, 160, 74, 0.18);
-    box-shadow: 0 0 50px rgba(201, 160, 74, 0.5), 0 0 100px rgba(201, 160, 74, 0.2);
+  25% {
+    border-color: rgba(58, 1, 92, 0.95);
+    background-color: rgba(58, 1, 92, 0.14);
+    box-shadow: 0 0 48px rgba(58, 1, 92, 0.22), 0 0 110px rgba(58, 1, 92, 0.10);
   }
-  55%  {
-    border-color: rgba(59, 188, 188, 0.9);
-    background-color: rgba(59, 188, 188, 0.14);
-    box-shadow: 0 0 50px rgba(59, 188, 188, 0.45), 0 0 100px rgba(59, 188, 188, 0.15);
+  55% {
+    border-color: rgba(79, 1, 71, 0.9);
+    background-color: rgba(79, 1, 71, 0.12);
+    box-shadow: 0 0 48px rgba(79, 1, 71, 0.20), 0 0 110px rgba(79, 1, 71, 0.08);
   }
-  80%  {
-    border-color: rgba(201, 160, 74, 0.7);
-    background-color: rgba(201, 160, 74, 0.10);
-    box-shadow: 0 0 30px rgba(201, 160, 74, 0.3);
+  80% {
+    border-color: rgba(53, 1, 44, 0.7);
+    background-color: rgba(53, 1, 44, 0.10);
+    box-shadow: 0 0 32px rgba(53, 1, 44, 0.16);
   }
   100% {
-    border-color: rgba(59, 188, 188, 0.4);
+    border-color: rgba(17, 0, 28, 0.22);
     background-color: transparent;
     box-shadow: none;
   }

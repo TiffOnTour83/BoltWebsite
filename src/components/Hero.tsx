@@ -15,60 +15,80 @@ export default function Hero() {
       id="top"
       className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden"
     >
-      {/* Coordinate grid overlay */}
+      {/* Luxury background wash */}
       <div
-        className="absolute inset-0 opacity-[0.06] pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `
-            linear-gradient(rgba(59,188,188,1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(59,188,188,1) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
+          background:
+            'radial-gradient(circle at 20% 10%, rgba(58,1,92,0.10) 0%, transparent 55%), radial-gradient(circle at 80% 20%, rgba(79,1,71,0.08) 0%, transparent 55%), radial-gradient(circle at 50% 85%, rgba(17,0,28,0.04) 0%, transparent 60%)',
         }}
       />
-
-      {/* Radial glow */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
-          style={{
-            background: 'radial-gradient(circle, rgba(201,160,74,0.6) 0%, rgba(59,188,188,0.3) 40%, transparent 70%)',
-          }}
-        />
-      </div>
 
       <div ref={titleRef} className="reveal relative z-10 text-center max-w-4xl mx-auto">
         {/* Eyebrow */}
         <div className="flex items-center justify-center gap-3 mb-6">
-          <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold-500" />
-          <span className="text-teal-400 text-xs tracking-[0.3em] uppercase font-medium">
-            Delta Air Lines · Pilot Learning & Development
+          <div
+            className="h-px w-12"
+            style={{ background: 'linear-gradient(to right, transparent, rgba(58,1,92,0.55))' }}
+          />
+          <span
+            className="text-xs tracking-[0.3em] uppercase font-medium"
+            style={{ color: 'rgba(17,0,28,0.70)' }}
+          >
+            Regulatory Compliance · Systems Architect · People Leader
           </span>
-          <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold-500" />
+          <div
+            className="h-px w-12"
+            style={{ background: 'linear-gradient(to left, transparent, rgba(58,1,92,0.55))' }}
+          />
         </div>
 
-        {/* Headline */}
-        <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-warm-100 mb-4 leading-tight tracking-tight">
-          Tiffany Castro —<br className="hidden sm:block" />{' '}
-          <span className="text-gradient-gold">Systems Integration Engineer</span>
+        {/* Name */}
+        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl mb-3 leading-tight tracking-tight">
+          Tiffany Castro
         </h1>
 
+        {/* Tagline */}
+        <p className="font-display text-2xl md:text-3xl mb-4 leading-snug text-gradient-amethyst">
+          Work in Progress
+        </p>
+
+        {/* Snapshot */}
+        <p
+          className="text-sm md:text-base max-w-2xl mx-auto leading-relaxed mb-7"
+          style={{ color: 'rgba(17,0,28,0.72)' }}
+        >
+          I untangle complex, regulated workflows into integrated, auditable systems.
+        </p>
+
         {/* Location */}
-        <p className="text-teal-300 text-sm md:text-base tracking-wider mb-10 opacity-90">
-          Atlanta, GA &nbsp;·&nbsp; Open to relocation
+        <p
+          className="text-sm md:text-base tracking-wider mb-10"
+          style={{ color: 'rgba(17,0,28,0.62)' }}
+        >
+          Atlanta, Georgia &nbsp;·&nbsp; Open to Relocation
         </p>
 
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mt-2">
           <a
             href="#projects"
-            className="px-8 py-3 bg-gold-500 hover:bg-gold-400 text-navy-950 font-semibold text-sm tracking-widest uppercase rounded transition-all duration-200 glow-gold"
+            className="px-8 py-3 font-semibold text-sm tracking-widest uppercase rounded-xl transition-all duration-200 glow-amethyst"
+            style={{
+              background: '#3a015c',
+              color: '#ffffff',
+            }}
           >
             View My Work
           </a>
           <a
             href="#about"
-            className="px-8 py-3 border border-teal-500/60 text-teal-300 hover:border-teal-400 hover:text-teal-200 font-medium text-sm tracking-widest uppercase rounded transition-all duration-200"
+            className="px-8 py-3 border font-medium text-sm tracking-widest uppercase rounded-xl transition-all duration-200"
+            style={{
+              borderColor: 'rgba(58,1,92,0.35)',
+              color: '#3a015c',
+              background: 'rgba(255,255,255,0.60)',
+            }}
           >
             About Me
           </a>
@@ -78,7 +98,8 @@ export default function Hero() {
       {/* Scroll indicator */}
       <a
         href="#about"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-warm-300/50 hover:text-gold-300 transition-colors animate-bounce"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 transition-colors animate-bounce"
+        style={{ color: 'rgba(17,0,28,0.35)' }}
         aria-label="Scroll down"
       >
         <ChevronDown size={28} />

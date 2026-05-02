@@ -10,10 +10,15 @@ interface Particle {
   color: string;
 }
 
+function clamp(n: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, n));
+}
+
 export default function ParticleCanvas() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const particlesRef = useRef<Particle[]>([]);
   const animFrameRef = useRef<number>(0);
+  const startRef = useRef<number>(performance.now());
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -21,7 +26,8 @@ export default function ParticleCanvas() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const colors = ['rgba(201,160,74,', 'rgba(59,188,188,', 'rgba(247,243,238,'];
+    // Amethyst palette (alpha appended later)
+    const colors = ['rgba(58,1,92,', 'rgba(79,1,71,', 'rgba(53,1,44,'];
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -30,34 +36,42 @@ export default function ParticleCanvas() {
     resize();
     window.addEventListener('resize', resize);
 
-    const count = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 9000), 110);
+    const count = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 9500), 120);
 
     particlesRef.current = Array.from({ length: count }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      size: Math.random() * 2.2 + 0.6,
-      opacity: Math.random() * 0.55 + 0.25,
+      vx: (Math.random() - 0.5) * 0.28,
+      vy: (Math.random() - 0.5) * 0.28,
+      size: Math.random() * 2.0 + 0.55,
+      opacity: Math.random() * 0.45 + 0.18,
       color: colors[Math.floor(Math.random() * colors.length)],
     }));
 
-    const draw = () => {
+    const draw = (now: number) => {
+      const t = (now - startRef.current) / 1000;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       const pts = particlesRef.current;
 
-      // Draw connections
+      // Pulse between "more connected" and "more sparse" every ~18s
+      const pulse = (Math.sin((Math.PI * 2 * t) / 18) + 1) / 2; // 0..1
+      const connectDist = 120 + pulse * 95; // 120..215
+
+      // Draw connections (fade based on distance + pulse)
       for (let i = 0; i < pts.length; i++) {
         for (let j = i + 1; j < pts.length; j++) {
           const dx = pts[i].x - pts[j].x;
           const dy = pts[i].y - pts[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 140) {
-            const alpha = (1 - dist / 140) * 0.28;
+          if (dist < connectDist) {
+            // Stronger lines when pulse is high; always subtle on white
+            const base = (1 - dist / connectDist);
+            const alpha = clamp(base * (0.08 + pulse * 0.16), 0, 0.22);
+
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(201,160,74,${alpha})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(58,1,92,${alpha})`;
+            ctx.lineWidth = 0.9;
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
             ctx.stroke();
@@ -84,7 +98,7 @@ export default function ParticleCanvas() {
       animFrameRef.current = requestAnimationFrame(draw);
     };
 
-    draw();
+    animFrameRef.current = requestAnimationFrame(draw);
 
     return () => {
       cancelAnimationFrame(animFrameRef.current);
