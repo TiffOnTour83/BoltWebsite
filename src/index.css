@@ -5,45 +5,25 @@
 @tailwind utilities;
 
 /* =========================================================
-   DESIGN SYSTEM — OPTION 3: “Modern Systems + Curiosity Layer”
-   Single source of truth.
+   FINAL NO-DRIFT DESIGN TOKENS (LOCKED)
+   Only these 9 tokens are allowed to exist.
+   If it is not one of these, it must not exist.
+
+   Tokens:
+   --bg, --surface, --text, --text-muted,
+   --accent, --state, --decor,
+   --border, --backdrop
    ========================================================= */
 :root {
-  /* Base */
   --bg: #0f1115;
-
-  /* Surface */
   --surface: #151a22;
-  --surface-2: #1b2230; /* slightly lifted surface */
-
-  /* Text */
   --text: #e6edf3;
   --text-muted: #9aa7b2;
-  --text-faint: rgba(230, 237, 243, 0.55);
-
-  /* Accents */
-  --accent: #c383b5; /* identity / curiosity */
-  --accent-2: #4fd1c5; /* structure / system logic */
-  --state: #a08a50; /* metadata / status */
-
-  /* Derived tokens */
-  --accent-soft: rgba(195, 131, 181, 0.16);
-  --accent-2-soft: rgba(79, 209, 197, 0.16);
-
-  /* Borders */
-  --border: rgba(230, 237, 243, 0.10);
-  --border-strong: rgba(230, 237, 243, 0.18);
-
-  /* Overlay */
+  --accent: #4fd1c5; /* interaction identity (LOCKED) */
+  --state: #a08a50; /* metadata meaning only */
+  --decor: #c383b5; /* background-only noise (never interactive) */
+  --border: rgba(230, 237, 243, 0.12);
   --backdrop: rgba(15, 17, 21, 0.78);
-
-  /* Shadows / glow */
-  --shadow: 0 22px 70px rgba(0, 0, 0, 0.45);
-  --glow-accent: 0 0 26px rgba(195, 131, 181, 0.16), 0 0 60px rgba(195, 131, 181, 0.08);
-  --glow-accent-2: 0 0 26px rgba(79, 209, 197, 0.14), 0 0 60px rgba(79, 209, 197, 0.07);
-
-  /* Focus ring */
-  --focus: 0 0 0 3px rgba(79, 209, 197, 0.35);
 }
 
 @layer base {
@@ -56,81 +36,40 @@
   }
 
   body {
-    background-color: var(--bg);
+    background: var(--bg);
     color: var(--text);
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
-  a {
+  /* Default everything to neutral */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  li,
+  span {
     color: inherit;
   }
 
   :focus-visible {
-    outline: none;
-    box-shadow: var(--focus);
+    outline: 2px solid rgba(79, 209, 197, 0.55);
+    outline-offset: 3px;
     border-radius: 10px;
   }
 }
 
 @layer components {
-  /* Layout helpers */
-  .surface {
+  /* Neutral surfaces */
+  .card-base {
+    @apply border rounded-2xl p-6 transition-all duration-300;
     background: var(--surface);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
+    border-color: var(--border);
   }
 
-  .surface-2 {
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow);
-  }
-
-  /* Text hierarchy */
-  .text-primary {
-    color: var(--text);
-  }
-  .text-muted {
-    color: var(--text-muted);
-  }
-  .text-faint {
-    color: var(--text-faint);
-  }
-
-  /* Accent helpers */
-  .text-accent {
-    color: var(--accent);
-  }
-  .text-accent-2 {
-    color: var(--accent-2);
-  }
-  .text-state {
-    color: var(--state);
-  }
-
-  .bg-accent-soft {
-    background: var(--accent-soft);
-  }
-  .bg-accent-2-soft {
-    background: var(--accent-2-soft);
-  }
-
-  .border-accent {
-    border-color: rgba(195, 131, 181, 0.45);
-  }
-  .border-accent-2 {
-    border-color: rgba(79, 209, 197, 0.45);
-  }
-
-  .glow-accent {
-    box-shadow: var(--glow-accent);
-  }
-  .glow-accent-2 {
-    box-shadow: var(--glow-accent-2);
-  }
-
-  /* Existing class compat: keep your component classes stable */
   .nav-link {
     @apply transition-colors duration-200 text-sm tracking-widest uppercase font-medium;
     color: var(--text-muted);
@@ -139,49 +78,54 @@
     color: var(--text);
   }
 
-  .card-base {
-    @apply border rounded-2xl p-6 transition-all duration-300;
-    background: var(--surface);
-    border-color: var(--border);
-    box-shadow: var(--shadow);
-  }
-  .card-base:hover {
-    border-color: var(--border-strong);
-  }
-
   .tag {
     @apply inline-block px-3 py-1 text-xs font-medium rounded-full tracking-wide;
     border: 1px solid var(--border);
     background: rgba(230, 237, 243, 0.04);
     color: var(--text-muted);
   }
-}
 
-@layer utilities {
-  .text-gradient-accent {
-    background: linear-gradient(135deg, var(--accent), var(--accent-2));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Interaction signal (accent) — ONLY for interactive elements */
+  .interactive-accent {
+    color: var(--accent);
   }
 
-  .border-default {
-    border-color: var(--border);
+  /* Buttons: only two types */
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    transition: opacity 180ms ease, transform 180ms ease;
+  }
+  .btn-primary:hover {
+    opacity: 0.92;
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    transition: opacity 180ms ease, transform 180ms ease, border-color 180ms ease;
+  }
+  /* Secondary hover: accent border ONLY (no accent text + border together) */
+  .btn-secondary:hover {
+    border-color: rgba(79, 209, 197, 0.55);
+    transform: translateY(-1px);
   }
 }
 
 /* Particle canvas */
 #particle-canvas {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100%;
   height: 100%;
   pointer-events: none;
   z-index: 0;
 }
 
-/* Scrollbar */
+/* Scrollbar (neutral) */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -189,11 +133,11 @@
   background: rgba(230, 237, 243, 0.04);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(79, 209, 197, 0.30);
+  background: rgba(230, 237, 243, 0.14);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(79, 209, 197, 0.45);
+  background: rgba(230, 237, 243, 0.22);
 }
 
 /* Section reveal animation */
@@ -202,6 +146,7 @@
   transform: translateY(10px);
   transition: opacity 650ms ease, transform 650ms ease;
 }
+
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
