@@ -1,14 +1,9 @@
 import { useState } from 'react';
 
-interface SpokeItem {
-  label: string;
-  type: 'highlight' | 'skill';
-}
-
 interface HubProject {
   id: number;
   title: string;
-  titleLines: string[];   // for SVG text wrapping
+  titleLines: string[]; // for SVG text wrapping
   category: string;
   color: string;
   highlights: string[];
@@ -22,103 +17,69 @@ const hubProjects: HubProject[] = [
     title: 'Document Analysis Framework',
     titleLines: ['Document Analysis', 'Framework'],
     category: 'Systems Thinking',
-    color: '#c9a04a',
-    desc: 'A repeatable 118-step methodology to untangle any organizational complexity.',
-    highlights: [
-      'Pull the Process',
-      '118-Step Methodology',
-      'Untangle Complexity',
-      'Verify Outcomes',
-    ],
-    skills: [
-      'Process Mapping',
-      'Automation',
-      'Risk Assessment',
-      'Documentation',
-    ],
+    color: '#3a015c',
+    desc: 'A repeatable 118-step methodology to untangle organizational complexity.',
+    highlights: ['Pull the Process', '118-Step Method', 'Untangle', 'Verify Outcomes'],
+    skills: ['Process Mapping', 'Automation', 'Risk Assessment', 'Documentation'],
   },
   {
     id: 2,
     title: 'Comply365 Document Conversion',
     titleLines: ['Comply365 Document', 'Conversion'],
     category: 'Enterprise Integration',
-    color: '#3bbcbc',
-    desc: 'Converting AQP/DIG docs from Word to XTML via automation and version control.',
-    highlights: [
-      'XTML Conversion',
-      'MS Pilot Plugin',
-      'Version Control',
-      'Enterprise Scale',
-    ],
-    skills: [
-      'Comply365 / XTML',
-      'Power Automate',
-      'Document Merging',
-      'M365',
-    ],
+    color: '#4f0147',
+    desc: 'Automation + version control for AQP/DIG doc conversion (Word → XTML).',
+    highlights: ['XTML Conversion', 'Pilot Plugin', 'Version Control', 'Enterprise Scale'],
+    skills: ['Comply365 / XTML', 'Power Automate', 'Doc Merging', 'M365'],
   },
   {
     id: 3,
     title: 'AQP Change Management',
     titleLines: ['AQP Change', 'Management'],
-    category: 'Compliance & Orchestration',
-    color: '#d4814f',
-    desc: 'Cross-system compliance integration with audit trails across multiple departments.',
-    highlights: [
-      'Compliance Bridge',
-      'Audit Trails',
-      'Cross-Dept Flow',
-      'Regulatory Req.',
-    ],
-    skills: [
-      'Smartsheet',
-      'AQP Design',
-      'Change Management',
-      'SharePoint',
-    ],
+    category: 'Compliance',
+    color: '#35012c',
+    desc: 'Cross-system compliance integration with audit trails across departments.',
+    highlights: ['Compliance Bridge', 'Audit Trails', 'Cross-Dept Flow', 'Regulatory Req.'],
+    skills: ['Smartsheet', 'AQP Design', 'Change Mgmt', 'SharePoint'],
   },
   {
     id: 4,
     title: 'N Drive → SharePoint Migration',
     titleLines: ['N Drive →', 'SharePoint Migration'],
-    category: 'Digital Transformation',
-    color: '#e8cf9a',
-    desc: 'Legacy 7-year system migration with legal retention compliance and verification.',
-    highlights: [
-      'Legacy Migration',
-      'Legal Retention',
-      'Document Verification',
-      'Space Management',
-    ],
-    skills: [
-      'SharePoint',
-      'M365 Purview',
-      'Digital Transform.',
-      'Legal Compliance',
-    ],
+    category: 'Transformation',
+    color: '#11001c',
+    desc: 'Legacy migration with retention compliance and verification.',
+    highlights: ['Legacy Migration', 'Legal Retention', 'Verification', 'Space Mgmt'],
+    skills: ['SharePoint', 'M365 Purview', 'Digital Transform.', 'Legal Compliance'],
   },
 ];
 
 // SVG layout constants
 const W = 840;
 const H = 460;
-const CX = W / 2;      // 420
-const CY = H / 2;      // 230
-const HUB_W = 210;
-const HUB_H = 120;
-const HUB_X = CX - HUB_W / 2;   // 315
-const HUB_Y = CY - HUB_H / 2;   // 170
-const HUB_LEFT_X = HUB_X;        // 315
-const HUB_RIGHT_X = HUB_X + HUB_W; // 525
+const CX = W / 2; // 420
+const CY = H / 2; // 230
+const HUB_W = 230;
+const HUB_H = 142;
+const HUB_X = CX - HUB_W / 2; // 305
+const HUB_Y = CY - HUB_H / 2; // 159
+const HUB_LEFT_X = HUB_X; // 305
+const HUB_RIGHT_X = HUB_X + HUB_W; // 535
 const NODE_Y = [105, 185, 275, 355];
 
 const HIGHLIGHT_X = 115;
-const SKILL_X = W - HIGHLIGHT_X;   // 725
+const SKILL_X = W - HIGHLIGHT_X; // 725
+
+function clamp(n: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, n));
+}
+
+function truncate(s: string, max: number) {
+  return s.length > max ? s.slice(0, max - 1) + '…' : s;
+}
 
 function calcHubEdge(nodeX: number, nodeY: number, isLeft: boolean) {
-  // Edge point on hub rect boundary for a line going toward nodeX, nodeY
   const edgeX = isLeft ? HUB_LEFT_X : HUB_RIGHT_X;
-  // Interpolate y along edge so lines fan out nicely
   const t = (nodeY - NODE_Y[0]) / (NODE_Y[NODE_Y.length - 1] - NODE_Y[0]);
   const edgeY = HUB_Y + 20 + t * (HUB_H - 40);
   return { x: edgeX, y: edgeY };
@@ -140,8 +101,8 @@ function SpokeLines({ project }: { project: HubProject }) {
             x2={nodeX}
             y2={nodeY}
             stroke={color}
-            strokeWidth="1.5"
-            strokeOpacity="0.35"
+            strokeWidth="1.7"
+            strokeOpacity="0.25"
             strokeDasharray="4 3"
           />
         );
@@ -157,9 +118,9 @@ function SpokeLines({ project }: { project: HubProject }) {
             y1={edge.y}
             x2={nodeX}
             y2={nodeY}
-            stroke="#3bbcbc"
-            strokeWidth="1.5"
-            strokeOpacity="0.35"
+            stroke="#3a015c"
+            strokeWidth="1.7"
+            strokeOpacity="0.20"
             strokeDasharray="4 3"
           />
         );
@@ -170,7 +131,6 @@ function SpokeLines({ project }: { project: HubProject }) {
 
 function HubRect({ project }: { project: HubProject }) {
   const col = project.color;
-  // Parse hex to RGB for gradients
   const r = parseInt(col.slice(1, 3), 16);
   const g = parseInt(col.slice(3, 5), 16);
   const b = parseInt(col.slice(5, 7), 16);
@@ -181,8 +141,8 @@ function HubRect({ project }: { project: HubProject }) {
     <>
       <defs>
         <linearGradient id={gradId} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor={`rgba(${r},${g},${b},0.20)`} />
-          <stop offset="100%" stopColor="rgba(10,22,40,0.70)" />
+          <stop offset="0%" stopColor={`rgba(${r},${g},${b},0.12)`} />
+          <stop offset="100%" stopColor="rgba(255,255,255,0.92)" />
         </linearGradient>
         <filter id={glowId} x="-30%" y="-30%" width="160%" height="160%">
           <feGaussianBlur stdDeviation="8" result="blur" />
@@ -200,7 +160,7 @@ function HubRect({ project }: { project: HubProject }) {
         width={HUB_W + 12}
         height={HUB_H + 12}
         rx="22"
-        fill={`rgba(${r},${g},${b},0.12)`}
+        fill={`rgba(${r},${g},${b},0.08)`}
         filter={`url(#${glowId})`}
       />
 
@@ -210,23 +170,23 @@ function HubRect({ project }: { project: HubProject }) {
         y={HUB_Y}
         width={HUB_W}
         height={HUB_H}
-        rx="16"
+        rx="18"
         fill={`url(#${gradId})`}
         stroke={col}
-        strokeWidth="1.5"
-        strokeOpacity="0.7"
+        strokeWidth="1.6"
+        strokeOpacity="0.50"
       />
 
       {/* Category label */}
       <text
         x={CX}
-        y={HUB_Y + 22}
+        y={HUB_Y + 24}
         textAnchor="middle"
         fontSize="9"
         fill={col}
         fontFamily="Inter, system-ui, sans-serif"
         letterSpacing="0.12em"
-        opacity="0.85"
+        opacity="0.88"
         style={{ textTransform: 'uppercase' }}
       >
         {project.category}
@@ -237,36 +197,34 @@ function HubRect({ project }: { project: HubProject }) {
         <text
           key={i}
           x={CX}
-          y={HUB_Y + 45 + i * 20}
+          y={HUB_Y + 52 + i * 22}
           textAnchor="middle"
-          fontSize="15"
-          fontWeight="600"
-          fill="#f7f3ee"
+          fontSize="16"
+          fontWeight="650"
+          fill="#11001c"
           fontFamily="'Playfair Display', Georgia, serif"
         >
           {line}
         </text>
       ))}
 
-      {/* Description (truncated) */}
+      {/* Description (short + truncated) */}
       <text
         x={CX}
-        y={HUB_Y + 99}
+        y={HUB_Y + HUB_H - 20}
         textAnchor="middle"
-        fontSize="9.5"
-        fill="rgba(221,208,191,0.65)"
+        fontSize="10"
+        fill="rgba(17,0,28,0.64)"
         fontFamily="Inter, system-ui, sans-serif"
       >
-        {project.desc.length > 52 ? project.desc.slice(0, 52) + '…' : project.desc}
+        {truncate(project.desc, 56)}
       </text>
     </>
   );
 }
 
 function NodeDot({ x, y, color }: { x: number; y: number; color: string }) {
-  return (
-    <circle cx={x} cy={y} r="5" fill={color} fillOpacity="0.9" />
-  );
+  return <circle cx={x} cy={y} r="5" fill={color} fillOpacity="0.9" />;
 }
 
 export default function HubSpoke() {
@@ -281,19 +239,23 @@ export default function HubSpoke() {
           <button
             key={p.id}
             onClick={() => setActiveId(p.id)}
-            className={`px-4 py-2 rounded-lg text-xs font-medium tracking-wide transition-all duration-200 border ${
-              p.id === activeId
-                ? 'border-transparent text-navy-950 font-semibold'
-                : 'border-warm-300/20 text-warm-300/70 hover:border-warm-300/40 hover:text-warm-200 bg-transparent'
-            }`}
+            className="px-4 py-2 rounded-lg text-xs font-medium tracking-wide transition-all duration-200 border"
             style={
               p.id === activeId
-                ? { background: p.color }
-                : {}
+                ? {
+                    borderColor: 'rgba(17,0,28,0.10)',
+                    background: 'rgba(58,1,92,0.10)',
+                    color: '#11001c',
+                    fontWeight: 650,
+                  }
+                : {
+                    borderColor: 'rgba(17,0,28,0.10)',
+                    background: 'rgba(255,255,255,0.65)',
+                    color: 'rgba(17,0,28,0.70)',
+                  }
             }
           >
-            {p.title.split('→')[0].trim().split(' ').slice(0, 3).join(' ')}
-            {p.title.includes('→') ? ' →…' : ''}
+            {truncate(p.title.split('→')[0].trim(), 18)}
           </button>
         ))}
       </div>
@@ -318,12 +280,12 @@ export default function HubSpoke() {
                 x={HIGHLIGHT_X - 12}
                 y={NODE_Y[i] + 4}
                 textAnchor="end"
-                fontSize="11.5"
+                fontSize="11"
                 fontFamily="Inter, system-ui, sans-serif"
                 fill={project.color}
-                fontWeight="500"
+                fontWeight="600"
               >
-                {label}
+                {truncate(label, 18)}
               </text>
             </g>
           ))}
@@ -331,17 +293,17 @@ export default function HubSpoke() {
           {/* Right skill nodes */}
           {project.skills.map((label, i) => (
             <g key={`sk${i}`}>
-              <NodeDot x={SKILL_X} y={NODE_Y[i]} color="#3bbcbc" />
+              <NodeDot x={SKILL_X} y={NODE_Y[i]} color="#3a015c" />
               <text
                 x={SKILL_X + 12}
                 y={NODE_Y[i] + 4}
                 textAnchor="start"
-                fontSize="11.5"
+                fontSize="11"
                 fontFamily="Inter, system-ui, sans-serif"
-                fill="#3bbcbc"
-                fontWeight="500"
+                fill="#3a015c"
+                fontWeight="600"
               >
-                {label}
+                {truncate(label, 18)}
               </text>
             </g>
           ))}
@@ -358,11 +320,15 @@ export default function HubSpoke() {
             className="w-2.5 h-2.5 rounded-full inline-block flex-shrink-0"
             style={{ background: project.color }}
           />
-          <span className="text-xs text-warm-300/60 tracking-wide">Highlights</span>
+          <span className="text-xs tracking-wide" style={{ color: 'rgba(17,0,28,0.60)' }}>
+            Highlights
+          </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-2.5 h-2.5 rounded-full inline-block bg-teal-400 flex-shrink-0" />
-          <span className="text-xs text-warm-300/60 tracking-wide">Skills</span>
+          <span className="w-2.5 h-2.5 rounded-full inline-block flex-shrink-0" style={{ background: '#3a015c' }} />
+          <span className="text-xs tracking-wide" style={{ color: 'rgba(17,0,28,0.60)' }}>
+            Skills
+          </span>
         </div>
       </div>
     </div>

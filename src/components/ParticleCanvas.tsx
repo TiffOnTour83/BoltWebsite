@@ -43,8 +43,8 @@ export default function ParticleCanvas() {
       y: Math.random() * canvas.height,
       vx: (Math.random() - 0.5) * 0.28,
       vy: (Math.random() - 0.5) * 0.28,
-      size: Math.random() * 2.0 + 0.55,
-      opacity: Math.random() * 0.45 + 0.18,
+      size: Math.random() * 2.15 + 0.65,
+      opacity: Math.random() * 0.55 + 0.22,
       color: colors[Math.floor(Math.random() * colors.length)],
     }));
 
@@ -56,7 +56,7 @@ export default function ParticleCanvas() {
 
       // Pulse between "more connected" and "more sparse" every ~18s
       const pulse = (Math.sin((Math.PI * 2 * t) / 18) + 1) / 2; // 0..1
-      const connectDist = 120 + pulse * 95; // 120..215
+      const connectDist = 135 + pulse * 120; // 135..255
 
       // Draw connections (fade based on distance + pulse)
       for (let i = 0; i < pts.length; i++) {
@@ -65,13 +65,13 @@ export default function ParticleCanvas() {
           const dy = pts[i].y - pts[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < connectDist) {
-            // Stronger lines when pulse is high; always subtle on white
-            const base = (1 - dist / connectDist);
-            const alpha = clamp(base * (0.08 + pulse * 0.16), 0, 0.22);
+            // Stronger lines when pulse is high
+            const base = 1 - dist / connectDist;
+            const alpha = clamp(base * (0.16 + pulse * 0.22), 0, 0.42);
 
             ctx.beginPath();
             ctx.strokeStyle = `rgba(58,1,92,${alpha})`;
-            ctx.lineWidth = 0.9;
+            ctx.lineWidth = 1.35;
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
             ctx.stroke();

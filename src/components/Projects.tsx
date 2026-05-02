@@ -35,29 +35,34 @@ export default function Projects() {
       <section id="projects" ref={sectionRef} className="relative z-10 py-24 px-6">
         <div className="max-w-6xl mx-auto">
           <div className="reveal flex items-center gap-4 mb-4">
-            <div className="h-px flex-1 max-w-[60px] bg-teal-500/50" />
-            <span className="text-teal-400 text-xs tracking-[0.3em] uppercase font-medium">Work & Projects</span>
+            <div className="h-px flex-1 max-w-[60px]" style={{ background: 'rgba(58,1,92,0.22)' }} />
+            <span className="text-[#3a015c] text-xs tracking-[0.3em] uppercase font-medium">Work & Projects</span>
           </div>
 
           <div className="reveal mb-12">
-            <h2 className="font-display text-4xl md:text-5xl text-warm-100 leading-tight">
+            <h2 className="font-display text-4xl md:text-5xl leading-tight" style={{ color: '#11001c' }}>
               Project Portfolio
             </h2>
-            <p className="text-warm-300/60 text-base mt-3 max-w-xl">
+            <p className="text-base mt-3 max-w-xl" style={{ color: 'rgba(17,0,28,0.72)' }}>
               Select a project hub to explore its highlights and skills.
             </p>
           </div>
 
           {/* Hub-and-spoke visualization */}
-          <div className="reveal card-base border-teal-700/30 p-6">
+          <div className="reveal card-base p-6">
             <div className="flex items-center justify-between gap-4 mb-5">
-              <p className="text-warm-300/60 text-xs tracking-widest uppercase font-medium">
+              <p className="text-xs tracking-widest uppercase font-medium" style={{ color: 'rgba(17,0,28,0.60)' }}>
                 Project Map
               </p>
               {/* LAM entry point */}
               <button
                 onClick={openLAM}
-                className="flex-shrink-0 px-3 py-1 rounded border border-teal-700/50 bg-teal-900/30 hover:bg-teal-800/40 hover:border-teal-600/60 text-teal-400 hover:text-teal-300 text-xs font-mono tracking-widest transition-all duration-200"
+                className="flex-shrink-0 px-3 py-1 rounded border text-xs font-mono tracking-widest transition-all duration-200"
+                style={{
+                  borderColor: 'rgba(58,1,92,0.30)',
+                  background: 'rgba(58,1,92,0.06)',
+                  color: '#3a015c',
+                }}
                 aria-label="Open LAM"
               >
                 LAM
@@ -69,10 +74,7 @@ export default function Projects() {
       </section>
 
       {lamOpen && (
-        <LAMModal
-          elapsedSeconds={lamElapsed}
-          onClose={() => setLamOpen(false)}
-        />
+        <LAMModal elapsedSeconds={lamElapsed} onClose={() => setLamOpen(false)} />
       )}
     </>
   );
