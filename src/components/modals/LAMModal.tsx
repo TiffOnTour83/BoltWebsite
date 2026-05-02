@@ -34,18 +34,18 @@ export default function LAMModal({ elapsedSeconds, onClose }: Props) {
   }
 
   return (
-    <BaseModal title="LAM" onClose={onClose}>
+    <BaseModal title="LAM: Leave a Mark!" onClose={onClose}>
       {/* Timer copy */}
       <div className="space-y-2 mb-6">
+        <p className="text-warm-300 leading-relaxed">
+          Most people skim. You read the fine print, don't you?
+        </p>
         <p className="text-warm-300 leading-relaxed">
           You made it here in{' '}
           <span className="text-gold-300 font-semibold">{elapsedSeconds}</span> seconds.
         </p>
         <p className="text-warm-300 leading-relaxed">
-          Most people skim. You read the fine print.
-        </p>
-        <p className="text-warm-300 leading-relaxed">
-          Leave your mark on the leaderboard.
+          Include your name on the leaderboard.
         </p>
       </div>
 

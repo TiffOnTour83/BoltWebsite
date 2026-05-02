@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Mail, Linkedin, MessageSquare } from 'lucide-react';
+import { Mail, Linkedin, MessageSquare, MapPin, CheckCircle2, Clock, Briefcase } from 'lucide-react';
 
 const availableFor = [
   'Speaking on systems optimization',
@@ -48,12 +48,6 @@ export default function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* Contact card */}
           <div className="reveal card-base border-gold-700/30 space-y-5">
-            <div>
-              <p className="text-gold-400 text-xs tracking-[0.2em] uppercase font-medium mb-1">Position</p>
-              <p className="text-warm-100 font-medium">FOP | AQP Sr. Specialist</p>
-              <p className="text-warm-300/70 text-sm">Pilot Learning & Development · Delta Air Lines</p>
-            </div>
-
             <a
               href="mailto:tiffanycastro83@yahoo.com"
               className="flex items-center gap-3 group"
@@ -85,6 +79,45 @@ export default function Contact() {
                 </p>
               </div>
             </a>
+
+            <div className="pt-2 border-t border-gold-800/20 space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-navy-800/60 border border-warm-300/10 flex items-center justify-center">
+                  <MapPin size={16} className="text-warm-300/50" />
+                </div>
+                <div>
+                  <p className="text-warm-300/60 text-xs tracking-widest uppercase mb-0.5">Location</p>
+                  <p className="text-warm-200 text-sm">Atlanta, GA &nbsp;·&nbsp; Open to relocation</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-teal-900/30 border border-teal-700/30 flex items-center justify-center">
+                  <CheckCircle2 size={16} className="text-teal-400" />
+                </div>
+                <div>
+                  <p className="text-warm-300/60 text-xs tracking-widest uppercase mb-0.5">Status</p>
+                  <p className="text-teal-300 text-sm">Open to new opportunities</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-navy-800/60 border border-warm-300/10 flex items-center justify-center">
+                  <Briefcase size={16} className="text-warm-300/50" />
+                </div>
+                <div>
+                  <p className="text-warm-300/60 text-xs tracking-widest uppercase mb-0.5">Work Format</p>
+                  <p className="text-warm-200 text-sm">Remote · Contract · Full-time</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="w-9 h-9 rounded-lg bg-navy-800/60 border border-warm-300/10 flex items-center justify-center">
+                  <Clock size={16} className="text-warm-300/50" />
+                </div>
+                <div>
+                  <p className="text-warm-300/60 text-xs tracking-widest uppercase mb-0.5">Response Time</p>
+                  <p className="text-warm-200 text-sm">Typically within 24 hours</p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Available for */}
