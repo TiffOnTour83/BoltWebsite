@@ -6,18 +6,28 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="relative z-10 border-t border-teal-800/20 py-8 px-6">
+      <footer className="relative z-10 border-t py-8 px-6" style={{ borderColor: 'rgba(17,0,28,0.10)' }}>
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="font-display text-gold-300 text-lg">TC</span>
-            <span className="text-warm-300/40 text-xs">·</span>
-            <span className="text-warm-300/50 text-xs tracking-wide">FOP | AQP Sr. Specialist</span>
+            <span className="font-display text-lg" style={{ color: '#3a015c' }}>
+              TC
+            </span>
+            <span className="text-xs" style={{ color: 'rgba(17,0,28,0.35)' }}>
+              ·
+            </span>
+            <span className="text-xs tracking-wide" style={{ color: 'rgba(17,0,28,0.62)' }}>
+              Atlanta, Georgia
+            </span>
           </div>
+
           <div className="flex items-center gap-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse-slow" />
-            <span className="text-warm-300/40 text-xs tracking-wide">Delta Air Lines · Pilot Learning &amp; Development</span>
+            <div className="w-1.5 h-1.5 rounded-full" style={{ background: 'rgba(58,1,92,0.55)' }} />
+            <span className="text-xs tracking-wide" style={{ color: 'rgba(17,0,28,0.55)' }}>
+              Systems integration · compliance · training systems
+            </span>
           </div>
-          <p className="text-warm-300/30 text-xs">
+
+          <p className="text-xs" style={{ color: 'rgba(17,0,28,0.45)' }}>
             &copy; {new Date().getFullYear()} Tiffany Castro
           </p>
         </div>
@@ -26,7 +36,12 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto mt-4 flex justify-center">
           <button
             onClick={() => setHatchOpen(true)}
-            className="text-warm-300/30 hover:text-warm-300/70 text-xs tracking-widest transition-colors duration-300 font-mono px-6 py-3 rounded-lg hover:bg-navy-800/60 border border-transparent hover:border-teal-900/40"
+            className="text-xs tracking-widest transition-colors duration-300 font-mono px-6 py-3 rounded-lg"
+            style={{
+              color: 'rgba(58,1,92,0.70)',
+              background: 'rgba(58,1,92,0.06)',
+              border: '1px solid rgba(58,1,92,0.18)',
+            }}
             aria-label="Open Maintenance Hatch"
           >
             ⌘ Maintenance Hatch
