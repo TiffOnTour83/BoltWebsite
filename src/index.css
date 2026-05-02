@@ -108,3 +108,16 @@
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Maintenance Hatch alarm flash */
+@keyframes hatch-alarm {
+  0%   { border-color: rgba(201, 160, 74, 0.4); background-color: rgba(201, 160, 74, 0.06); }
+  50%  { border-color: rgba(201, 160, 74, 0.9); background-color: rgba(201, 160, 74, 0.14); }
+  100% { border-color: rgba(59, 188, 188, 0.4); background-color: transparent; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hatch-alarm {
+    animation: hatch-alarm 450ms ease-out forwards;
+  }
+}

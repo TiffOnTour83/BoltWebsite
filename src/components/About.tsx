@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Puzzle, FileSearch, Settings, ShieldCheck } from 'lucide-react';
+import SystemArtifact from './modals/SystemArtifact';
 
 const pillars = [
   {
@@ -38,6 +39,7 @@ const pillars = [
 
 export default function About() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [artifactOpen, setArtifactOpen] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -107,13 +109,25 @@ export default function About() {
                   "I turn complexity into systems. While others see organizational chaos and walk away, I see an opportunity to build methodology."
                 </p>
                 <p className="text-warm-300/70 text-sm tracking-widest uppercase">
-                  — Tiffany Castro, FOP | AQP Sr. Specialist
+                  -- Tiffany Castro, FOP | AQP Sr. Specialist
                 </p>
               </div>
             </div>
           </div>
         </div>
+
+        {/* System Artifact utility link */}
+        <div className="reveal mt-6 flex justify-end">
+          <button
+            onClick={() => setArtifactOpen(true)}
+            className="text-warm-300/25 hover:text-warm-300/60 text-xs tracking-widest transition-colors duration-300 font-mono"
+          >
+            System Artifact
+          </button>
+        </div>
       </div>
+
+      {artifactOpen && <SystemArtifact onClose={() => setArtifactOpen(false)} />}
     </section>
   );
 }

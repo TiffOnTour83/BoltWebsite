@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import ProjectGraph from './ProjectGraph';
+import LAMModal from './modals/LAMModal';
+import { PAGE_LOAD_TS } from '../lib/pageLoad';
 
 const projects = [
   {
@@ -94,6 +96,13 @@ function ProjectCard({ p, index }: { p: typeof projects[0]; index: number }) {
 
 export default function Projects() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [lamOpen, setLamOpen] = useState(false);
+  const [lamElapsed, setLamElapsed] = useState(0);
+
+  function openLAM() {
+    setLamElapsed(Math.round((performance.now() - PAGE_LOAD_TS) / 1000 * 10) / 10);
+    setLamOpen(true);
+  }
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -113,6 +122,7 @@ export default function Projects() {
   }, []);
 
   return (
+    <>
     <section id="projects" ref={sectionRef} className="relative z-10 py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="reveal flex items-center gap-4 mb-4">
@@ -129,9 +139,19 @@ export default function Projects() {
 
         {/* Graph */}
         <div className="reveal mb-14 card-base border-teal-700/30 p-6">
-          <p className="text-warm-300/60 text-xs tracking-widest uppercase mb-1 font-medium">
-            Project Map — Complexity vs. Scope
-          </p>
+          <div className="flex items-start justify-between gap-4 mb-1">
+            <p className="text-warm-300/60 text-xs tracking-widest uppercase font-medium">
+              Project Map -- Complexity vs. Scope
+            </p>
+            {/* LAM entry point */}
+            <button
+              onClick={openLAM}
+              className="flex-shrink-0 px-3 py-1 rounded border border-teal-700/50 bg-teal-900/30 hover:bg-teal-800/40 hover:border-teal-600/60 text-teal-400 hover:text-teal-300 text-xs font-mono tracking-widest transition-all duration-200"
+              aria-label="Open LAM"
+            >
+              LAM
+            </button>
+          </div>
           <p className="text-warm-300/50 text-xs mb-5">Hover over any point to explore project details</p>
           <ProjectGraph />
         </div>
@@ -144,5 +164,13 @@ export default function Projects() {
         </div>
       </div>
     </section>
+
+    {lamOpen && (
+      <LAMModal
+        elapsedSeconds={lamElapsed}
+        onClose={() => setLamOpen(false)}
+      />
+    )}
+    </>
   );
 }
