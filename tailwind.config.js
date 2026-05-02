@@ -3,45 +3,29 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      /**
+       * Single Source of Truth:
+       * All semantic colors map to CSS variables defined in src/index.css (:root).
+       *
+       * To change the theme: edit ONLY the CSS variables.
+       */
       colors: {
-        navy: {
-          950: '#050d1a',
-          900: '#0a1628',
-          800: '#0f2040',
-          700: '#152a55',
-          600: '#1c3a6e',
-        },
-        teal: {
-          900: '#062a2a',
-          800: '#0a3d3d',
-          700: '#0e5555',
-          600: '#126e6e',
-          500: '#178787',
-          400: '#1fa0a0',
-          300: '#3bbcbc',
-        },
-        gold: {
-          900: '#2a1f00',
-          800: '#4a3700',
-          700: '#6b5000',
-          600: '#8c6900',
-          500: '#b08830',
-          400: '#c9a04a',
-          300: '#d9b86a',
-          200: '#e8cf9a',
-          100: '#f4e8cc',
-        },
-        copper: {
-          600: '#a0522d',
-          500: '#bf6c3d',
-          400: '#d4814f',
-          300: '#e09870',
-        },
-        warm: {
-          100: '#f7f3ee',
-          200: '#ede6db',
-          300: '#ddd0bf',
-        },
+        bg: 'var(--bg)',
+        surface: 'var(--surface)',
+        'surface-2': 'var(--surface-2)',
+
+        text: 'var(--text)',
+        'text-secondary': 'var(--text-secondary)',
+        'text-muted': 'var(--text-muted)',
+
+        accent: 'var(--accent)',
+        'accent-2': 'var(--accent-2)',
+        'accent-3': 'var(--accent-3)',
+        interaction: 'var(--interaction)',
+
+        border: 'var(--border)',
+        'border-strong': 'var(--border-strong)',
+        backdrop: 'var(--backdrop)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

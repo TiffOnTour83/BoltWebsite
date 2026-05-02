@@ -1,17 +1,38 @@
 import { useEffect, useRef } from 'react';
 
-interface Particle {
+type Particle = {
   x: number;
   y: number;
   vx: number;
   vy: number;
   size: number;
   opacity: number;
+  /** CSS color like: rgba(58,1,92, */
   color: string;
-}
+};
 
 function clamp(n: number, min: number, max: number) {
   return Math.max(min, Math.min(max, n));
+}
+
+function getRootVar(name: string, fallback: string) {
+  const v = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  return v || fallback;
+}
+
+function hexToRgb(hex: string): { r: number; g: number; b: number } | null {
+  const clean = hex.replace('#', '').trim();
+  const full = clean.length === 3 ? clean.split('').map((c) => c + c).join('') : clean;
+  if (full.length !== 6) return null;
+  const n = Number.parseInt(full, 16);
+  if (Number.isNaN(n)) return null;
+  return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+}
+
+function rgbaPrefixFromToken(varName: string, fallbackHex: string) {
+  const token = getRootVar(varName, fallbackHex);
+  const rgb = hexToRgb(token) || hexToRgb(fallbackHex) || { r: 58, g: 1, b: 92 };
+  return `rgba(${rgb.r},${rgb.g},${rgb.b},`;
 }
 
 export default function ParticleCanvas() {
@@ -26,8 +47,11 @@ export default function ParticleCanvas() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Amethyst palette (alpha appended later)
-    const colors = ['rgba(58,1,92,', 'rgba(79,1,71,', 'rgba(53,1,44,'];
+    // Pull colors from theme tokens (single source of truth)
+    const c1 = rgbaPrefixFromToken('--accent', '#3a015c');
+    const c2 = rgbaPrefixFromToken('--accent-2', '#4f0147');
+    const c3 = rgbaPrefixFromToken('--accent-3', '#35012c');
+    const colors = [c1, c2, c3];
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -70,7 +94,7 @@ export default function ParticleCanvas() {
             const alpha = clamp(base * (0.16 + pulse * 0.22), 0, 0.42);
 
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(58,1,92,${alpha})`;
+            ctx.strokeStyle = `${c1}${alpha})`;
             ctx.lineWidth = 1.35;
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
@@ -90,8 +114,8 @@ export default function ParticleCanvas() {
         if (p.y > canvas.height) p.y = 0;
 
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `${p.color}${p.opacity})`;
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
       });
 
@@ -106,5 +130,5 @@ export default function ParticleCanvas() {
     };
   }, []);
 
-  return <canvas ref={canvasRef} id="particle-canvas" />;
+  return <canvas id="particle-canvas" ref={canvasRef} aria-hidden="true" />;
 }

@@ -18,24 +18,14 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const navBg = scrolled ? 'rgba(58,1,92,0.16)' : 'rgba(58,1,92,0.10)';
-
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-      style={{
-        background: navBg,
-        backdropFilter: 'blur(12px)',
-        borderBottom: '1px solid rgba(14,11,20,0.08)',
-        boxShadow: scrolled ? '0 10px 30px rgba(14,11,20,0.10)' : 'none',
-      }}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled ? 'bg-surface/90 backdrop-blur-md border-b border-border shadow-sm' : 'bg-surface/55 backdrop-blur-sm'
+      }`}
     >
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a
-          href="#top"
-          className="font-display text-lg tracking-wider transition-colors"
-          style={{ color: 'var(--text)' }}
-        >
+        <a href="#top" className="font-display text-lg tracking-wider transition-colors text-accent">
           TC
         </a>
 
@@ -48,18 +38,7 @@ export default function Nav() {
           ))}
           <a
             href="#contact"
-            className="ml-2 px-5 py-2 border text-sm tracking-widest uppercase font-medium rounded-xl transition-all duration-200"
-            style={{
-              borderColor: 'rgba(79,1,71,0.35)',
-              color: 'var(--text)',
-              background: 'rgba(255,255,255,0.28)',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(79,1,71,0.55)';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.borderColor = 'rgba(79,1,71,0.35)';
-            }}
+            className="ml-2 px-5 py-2 border border-border-strong text-sm tracking-widest uppercase font-medium rounded-xl transition-all duration-200 bg-surface-2 text-text hover:text-accent"
           >
             Let's Connect
           </a>
@@ -67,8 +46,7 @@ export default function Nav() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden transition-colors"
-          style={{ color: 'var(--text-secondary)' }}
+          className="md:hidden transition-colors text-text-secondary"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -78,14 +56,7 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div
-          className="md:hidden px-6 py-6 flex flex-col gap-5"
-          style={{
-            background: 'rgba(58,1,92,0.16)',
-            backdropFilter: 'blur(12px)',
-            borderTop: '1px solid rgba(14,11,20,0.08)',
-          }}
-        >
+        <div className="md:hidden bg-surface/92 backdrop-blur-md border-t border-border px-6 py-6 flex flex-col gap-5">
           {links.map((l) => (
             <a
               key={l.href}
@@ -98,12 +69,7 @@ export default function Nav() {
           ))}
           <a
             href="#contact"
-            className="inline-block mt-2 px-5 py-2 border text-sm tracking-widest uppercase font-medium rounded-xl text-center transition-all"
-            style={{
-              borderColor: 'rgba(79,1,71,0.35)',
-              color: 'var(--text)',
-              background: 'rgba(255,255,255,0.28)',
-            }}
+            className="inline-block mt-2 px-5 py-2 border border-border-strong text-sm tracking-widest uppercase font-medium rounded-xl text-center transition-all bg-surface-2 text-text hover:text-accent"
             onClick={() => setMenuOpen(false)}
           >
             Let's Connect
