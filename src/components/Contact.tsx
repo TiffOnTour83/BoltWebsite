@@ -70,7 +70,7 @@ export default function Contact() {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/tiffany-castro"
+              href="https://www.linkedin.com/in/tiffany-castro-00679a1a1"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-3 group"

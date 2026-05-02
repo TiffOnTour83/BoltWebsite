@@ -17,7 +17,7 @@ export default function Hero() {
     >
       {/* Coordinate grid overlay */}
       <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        className="absolute inset-0 opacity-[0.06] pointer-events-none"
         style={{
           backgroundImage: `
             linear-gradient(rgba(59,188,188,1) 1px, transparent 1px),
@@ -30,7 +30,7 @@ export default function Hero() {
       {/* Radial glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-10"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-15"
           style={{
             background: 'radial-gradient(circle, rgba(201,160,74,0.6) 0%, rgba(59,188,188,0.3) 40%, transparent 70%)',
           }}
@@ -47,31 +47,19 @@ export default function Hero() {
           <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold-500" />
         </div>
 
-        {/* Name */}
-        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl text-warm-100 mb-4 leading-none tracking-tight">
-          Tiffany Castro
+        {/* Headline */}
+        <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-warm-100 mb-4 leading-tight tracking-tight">
+          Tiffany Castro —<br className="hidden sm:block" />{' '}
+          <span className="text-gradient-gold">Systems Integration Engineer</span>
         </h1>
 
-        {/* Title */}
-        <p className="text-gold-300 text-lg md:text-xl tracking-widest uppercase font-medium mb-3">
-          FOP | AQP Sr. Specialist
+        {/* Location */}
+        <p className="text-teal-300 text-sm md:text-base tracking-wider mb-10 opacity-90">
+          Atlanta, GA &nbsp;·&nbsp; Open to relocation
         </p>
-        <p className="text-warm-300 text-sm md:text-base tracking-wider mb-10 opacity-80">
-          Systems Integration & Process Optimization
-        </p>
-
-        {/* Tagline */}
-        <div className="relative inline-block">
-          <div className="absolute inset-0 rounded-xl bg-teal-800/20 blur-xl" />
-          <blockquote className="relative border border-teal-700/40 rounded-xl px-8 py-5 bg-navy-900/60 backdrop-blur-sm">
-            <p className="font-display text-xl md:text-2xl text-warm-100 italic">
-              "I Turn Complexity Into Systems."
-            </p>
-          </blockquote>
-        </div>
 
         {/* CTAs */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-2">
           <a
             href="#projects"
             className="px-8 py-3 bg-gold-500 hover:bg-gold-400 text-navy-950 font-semibold text-sm tracking-widest uppercase rounded transition-all duration-200 glow-gold"

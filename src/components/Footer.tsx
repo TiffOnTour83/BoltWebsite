@@ -22,13 +22,14 @@ export default function Footer() {
           </p>
         </div>
 
-        {/* Maintenance Hatch micro-link */}
+        {/* Maintenance Hatch — larger hit area */}
         <div className="max-w-6xl mx-auto mt-4 flex justify-center">
           <button
             onClick={() => setHatchOpen(true)}
-            className="text-warm-300/20 hover:text-warm-300/50 text-[11px] tracking-widest transition-colors duration-300 font-mono"
+            className="text-warm-300/30 hover:text-warm-300/70 text-xs tracking-widest transition-colors duration-300 font-mono px-6 py-3 rounded-lg hover:bg-navy-800/60 border border-transparent hover:border-teal-900/40"
+            aria-label="Open Maintenance Hatch"
           >
-            Maintenance Hatch
+            ⌘ Maintenance Hatch
           </button>
         </div>
       </footer>
