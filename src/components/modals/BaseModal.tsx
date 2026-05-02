@@ -47,7 +47,7 @@ export default function BaseModal({ title, onClose, children, panelClassName = '
       {/* Backdrop */}
       <div
         className="absolute inset-0"
-        style={{ background: 'rgba(14,11,20,0.72)', backdropFilter: 'blur(6px)' }}
+        style={{ background: 'var(--backdrop)', backdropFilter: 'blur(6px)' }}
         onClick={onClose}
         aria-hidden="true"
       />
@@ -58,7 +58,7 @@ export default function BaseModal({ title, onClose, children, panelClassName = '
         tabIndex={-1}
         className={`relative z-10 w-full max-w-lg rounded-2xl border p-8 shadow-2xl outline-none ${panelClassName}`}
         style={{
-          background: 'rgba(255,255,255,0.92)',
+          background: 'var(--surface)',
           borderColor: 'var(--border)',
           color: 'var(--text)',
         }}
