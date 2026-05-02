@@ -106,22 +106,24 @@ export default function About() {
               <div className="hidden sm:block w-1 h-full min-h-[80px] bg-gradient-to-b from-gold-500 to-teal-500 rounded-full flex-shrink-0" />
               <div>
                 <p className="font-display text-xl md:text-2xl text-warm-100 leading-relaxed italic mb-3">
-                  "I turn complexity into systems. While others see organizational chaos and walk away, I see an opportunity to build methodology."
+                  "I specialize in the problems that don't come with a playbook—connecting systems, untangling compliance, and building frameworks that actually hold up."
                 </p>
                 <p className="text-warm-300/70 text-sm tracking-widest uppercase">
-                  -- Tiffany Castro, FOP | AQP Sr. Specialist
+                  — Tiffany Castro, Systems Integration Engineer
                 </p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* System Artifact utility link */}
+        {/* System Artifact — subtly discoverable */}
         <div className="reveal mt-6 flex justify-end">
           <button
             onClick={() => setArtifactOpen(true)}
-            className="text-warm-300/25 hover:text-warm-300/60 text-xs tracking-widest transition-colors duration-300 font-mono"
+            className="flex items-center gap-2 text-teal-400/50 hover:text-teal-300 text-xs tracking-widest transition-colors duration-300 font-mono px-4 py-2 rounded-lg hover:bg-teal-900/20 border border-transparent hover:border-teal-800/40"
+            title="System Artifact — for the curious"
           >
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-500/60 animate-pulse-slow inline-block" />
             System Artifact
           </button>
         </div>

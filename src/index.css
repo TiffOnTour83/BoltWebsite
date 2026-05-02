@@ -14,7 +14,7 @@
   }
 
   body {
-    background-color: #050d1a;
+    background-color: #0c1a2e;
     color: #f7f3ee;
     font-family: 'Inter', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -111,13 +111,35 @@
 
 /* Maintenance Hatch alarm flash */
 @keyframes hatch-alarm {
-  0%   { border-color: rgba(201, 160, 74, 0.4); background-color: rgba(201, 160, 74, 0.06); }
-  50%  { border-color: rgba(201, 160, 74, 0.9); background-color: rgba(201, 160, 74, 0.14); }
-  100% { border-color: rgba(59, 188, 188, 0.4); background-color: transparent; }
+  0%   {
+    border-color: rgba(201, 160, 74, 0.4);
+    background-color: rgba(201, 160, 74, 0.06);
+    box-shadow: 0 0 0 rgba(201, 160, 74, 0);
+  }
+  25%  {
+    border-color: rgba(201, 160, 74, 1);
+    background-color: rgba(201, 160, 74, 0.18);
+    box-shadow: 0 0 50px rgba(201, 160, 74, 0.5), 0 0 100px rgba(201, 160, 74, 0.2);
+  }
+  55%  {
+    border-color: rgba(59, 188, 188, 0.9);
+    background-color: rgba(59, 188, 188, 0.14);
+    box-shadow: 0 0 50px rgba(59, 188, 188, 0.45), 0 0 100px rgba(59, 188, 188, 0.15);
+  }
+  80%  {
+    border-color: rgba(201, 160, 74, 0.7);
+    background-color: rgba(201, 160, 74, 0.10);
+    box-shadow: 0 0 30px rgba(201, 160, 74, 0.3);
+  }
+  100% {
+    border-color: rgba(59, 188, 188, 0.4);
+    background-color: transparent;
+    box-shadow: none;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .hatch-alarm {
-    animation: hatch-alarm 450ms ease-out forwards;
+    animation: hatch-alarm 1600ms ease-out forwards;
   }
 }

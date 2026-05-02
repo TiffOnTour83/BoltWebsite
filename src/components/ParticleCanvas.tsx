@@ -30,15 +30,15 @@ export default function ParticleCanvas() {
     resize();
     window.addEventListener('resize', resize);
 
-    const count = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 12000), 90);
+    const count = Math.min(Math.floor((window.innerWidth * window.innerHeight) / 9000), 110);
 
     particlesRef.current = Array.from({ length: count }, () => ({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.35,
-      vy: (Math.random() - 0.5) * 0.35,
-      size: Math.random() * 1.8 + 0.4,
-      opacity: Math.random() * 0.5 + 0.1,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      size: Math.random() * 2.2 + 0.6,
+      opacity: Math.random() * 0.55 + 0.25,
       color: colors[Math.floor(Math.random() * colors.length)],
     }));
 
@@ -53,11 +53,11 @@ export default function ParticleCanvas() {
           const dx = pts[i].x - pts[j].x;
           const dy = pts[i].y - pts[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 120) {
-            const alpha = (1 - dist / 120) * 0.12;
+          if (dist < 140) {
+            const alpha = (1 - dist / 140) * 0.28;
             ctx.beginPath();
             ctx.strokeStyle = `rgba(201,160,74,${alpha})`;
-            ctx.lineWidth = 0.5;
+            ctx.lineWidth = 0.8;
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
             ctx.stroke();
